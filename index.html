@@ -2,39 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <meta name="apple-mobile-web-app-title" content="Naval" />
   <link rel="apple-touch-icon" href="icon-192.png" />
   <link rel="manifest" href="manifest.json" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0a0a0a; color: #f0ece4; font-family: Georgia, "Times New Roman", serif; cursor: pointer; -webkit-tap-highlight-color: transparent; user-select: none; }
-    #top { height: 33dvh; display: flex; align-items: center; justify-content: center; }
-    #bottom { height: 67dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 2rem 4rem; }
-    #avatar { width: 52px; height: 52px; object-fit: cover; }
-    #quote { font-size: clamp(1.15rem, 4vw, 1.7rem); line-height: 1.65; text-align: center; max-width: 580px; opacity: 1; transition: opacity 0.25s ease; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      position: relative;            /* anchor for absolute children */
+      background: #0a0a0a;
+      color: #f0ece4;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow: hidden;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    /* LOGO — one quarter from the top */
+    #avatar {
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+    }
+
+    /* QUOTE — dead center of the screen */
+    #card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    #quote {
+      font-size: clamp(1.15rem, 4vw, 1.7rem);
+      line-height: 1.6;
+      overflow-wrap: break-word;
+      opacity: 1;
+      transition: opacity 0.25s ease;
+    }
+
     #quote.fade { opacity: 0; }
-    #attribution { margin-top: 1.75rem; font-size: 0.875rem; color: #666; letter-spacing: 0.04em; text-align: center; }
-    #hint { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #2a2a2a; letter-spacing: 0.12em; text-transform: uppercase; font-family: -apple-system, sans-serif; }
+
+    #attribution {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: #666;
+      letter-spacing: 0.04em;
+    }
+
+    /* HINT — pinned to bottom center */
+    #hint {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: #2a2a2a;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: -apple-system, sans-serif;
+    }
   </style>
   <title>Naval</title>
 </head>
 <body>
-  <div id="top">
-    <img id="avatar" src="naval-logo.png" alt="Naval Ravikant" />
-  </div>
-  <div id="bottom">
+  <img id="avatar" src="naval-logo.png" alt="Naval Ravikant" />
+  <div id="card">
     <div id="quote"></div>
     <div id="attribution">— Naval Ravikant</div>
   </div>
   <div id="hint">tap for another</div>
   <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+      navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
+    }
+    if (window.caches) {
+      caches.keys().then(ks => ks.forEach(k => caches.delete(k)));
     }
   </script>
-  <script src="app.js"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
