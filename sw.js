@@ -1,4 +1,4 @@
-const CACHE = "naval-v3";
+const CACHE = "naval-v4";
 const ASSETS = [
   "./index.html",
   "./styles.css",
