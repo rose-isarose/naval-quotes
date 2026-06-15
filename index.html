@@ -22,7 +22,7 @@
   <div id="hint">tap for another</div>
   <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js");
+      navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
     }
   </script>
   <script src="app.js"></script>
