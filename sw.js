@@ -1,4 +1,4 @@
-const CACHE = "naval-v2";
+const CACHE = "naval-v3";
 const ASSETS = [
   "./index.html",
   "./styles.css",
@@ -7,7 +7,7 @@ const ASSETS = [
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
-  "./naval-photo.jpg",
+  "./naval-logo.png",
 ];
 
 self.addEventListener("install", (e) => {
